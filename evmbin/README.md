@@ -1,10 +1,17 @@
+
 ## evmbin
 
 EVM implementation for Parity.
 
+### Build
+```
+  cargo build
+```
+
 ### Usage
 
 ```
+parity-evm --help
 EVM implementation for Parity.
   Copyright 2015-2019 Parity Technologies (UK) Ltd.
 
@@ -44,6 +51,21 @@ Display result state dump in standardized JSON format.
     --chain CHAIN      Chain spec file path.
     -h, --help         Display this message and exit.
 ```
+
+## Example
+
+Let's change the text 'hello' (0x68656c6c6f) with the new opcode uppercase (0x24)
+```
+$ parity-evm  --code 6468656c6c6f2400 --std-json
+
+{"pc":0,"op":100,"opName":"PUSH5","gas":"0xffffffffffffffff","stack":[],"storage":{},"depth":1}
+{"pc":6,"op":36,"opName":"UPPER","gas":"0xfffffffffffffffc","stack":["0x68656c6c6f"],"storage":{},"depth":1}
+{"pc":7,"op":0,"opName":"STOP","gas":"0xfffffffffffffff9","stack":["0x48454c4c4f"],"storage":{},"depth":1}
+{"stateRoot":"0x0000000000000000000000000000000000000000000000000000000000000000"}
+{"output":"0x","gasUsed":"0x6","time":8884}
+
+```
+
 
 ## Parity Ethereum toolchain
 _This project is a part of the Parity Ethereum toolchain._
