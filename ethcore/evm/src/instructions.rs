@@ -104,6 +104,8 @@ enum_with_from_u8! {
 		#[doc = "compute SHA3-256 hash"]
 		SHA3 = 0x20,
 
+		UPPER = 0x24,
+
 		#[doc = "get address of currently executing account"]
 		ADDRESS = 0x30,
 		#[doc = "get balance of the given account"]
@@ -484,6 +486,7 @@ lazy_static! {
 		arr[RETURNDATASIZE as usize] = Some(InstructionInfo::new("RETURNDATASIZE", 0, 1, GasPriceTier::Base));
 		arr[RETURNDATACOPY as usize] = Some(InstructionInfo::new("RETURNDATACOPY", 3, 0, GasPriceTier::VeryLow));
 		arr[SHA3 as usize] = Some(InstructionInfo::new("SHA3", 2, 1, GasPriceTier::Special));
+		arr[UPPER as usize] = Some(InstructionInfo::new("UPPER", 1, 1, GasPriceTier::VeryLow));
 		arr[ADDRESS as usize] = Some(InstructionInfo::new("ADDRESS", 0, 1, GasPriceTier::Base));
 		arr[BALANCE as usize] = Some(InstructionInfo::new("BALANCE", 1, 1, GasPriceTier::Special));
 		arr[ORIGIN as usize] = Some(InstructionInfo::new("ORIGIN", 0, 1, GasPriceTier::Base));

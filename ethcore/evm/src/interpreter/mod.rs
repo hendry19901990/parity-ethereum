@@ -709,6 +709,23 @@ impl<Cost: CostType> Interpreter<Cost> {
 				let k = keccak(self.mem.read_slice(offset, size));
 				self.stack.push(k.into_uint());
 			},
+			instructions::UPPER => {
+				let p = self.stack.pop_back();
+				let mut arr  : Vec<u8> = Vec::new();
+			    for i in 0..32 {
+			       arr.push(p.byte(i));       
+			    }
+
+			    if p.bits() == 0 {
+                   self.stack.push(p);
+			    }else{
+			    	let txt = std::str::from_utf8(&arr).unwrap().to_uppercase();
+				    let txt_upper = txt.as_bytes();
+				    let result = U256::from_little_endian(txt_upper);
+				
+					self.stack.push(result);
+			    }			    
+			},
 			instructions::SLOAD => {
 				let key = BigEndianHash::from_uint(&self.stack.pop_back());
 				let word = ext.storage_at(&key)?.into_uint();
